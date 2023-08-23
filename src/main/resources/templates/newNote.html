@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments :: head(title='Memoics Note - New Note')}"></head>
+<body class="bg-slate-50">
+<section class="w-screen flex flex-col md:items-center">
+    <div class="container md:w-2/4 p-2 md:px-4">
+        <div th:replace="~{fragments :: pageTitle(title = 'Add New Note')}" ></div>
+
+        <form method="POST" class="font-open-sans" th:object="${note}">
+            <div class="flex flex-col gap-y-1">
+                <label class="text-lg text-gray-700" for="title">Title</label>
+                <input th:field="*{title}" id="title" class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                       placeholder="Enter Title" type="text"/>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" ></span>
+            </div>
+            <div class="flex flex-col gap-y-1 mt-4">
+                <label class="text-lg text-gray-700" for="content">Content</label>
+                <textarea id="content" th:field="*{content}" rows="10" class="resize-none py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                          placeholder="Type your notes here..." ></textarea>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('content')}" th:errors="*{content}" ></span>
+            </div>
+            <div class="flex gap-x-2 mt-8">
+                <a href="/notes" class="rounded bg-gray-200 md:w-1/2 text-center cursor-pointer hover:bg-gray-100 hover:border-gray-200 px-4 py-2 transition-all">Cancel</a>
+                <input class="rounded bg-green-600 md:w-1/2 cursor-pointer hover:bg-green-500 text-white px-4 py-2"
+                       type="submit" value="Save Note"/>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

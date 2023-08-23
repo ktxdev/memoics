@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments :: head(title='Memoics Notes')}"></head>
+<body class="bg-slate-50">
+    <section class="w-screen flex flex-col md:items-center">
+        <div class="container w-full p-2 md:px-4">
+            <div class="flex justify-between items-center">
+
+                <div th:replace="~{fragments :: pageTitle(title = 'Memoics Notes')}" ></div>
+
+                <a href="/notes/new" class="rounded bg-green-600 hover:bg-green-500 text-white font-open-sans px-4 py-2">
+                    New Note
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4" >
+                <div th:each="note : ${notes}" class="note bg-white transition-all rounded-md border border-gray-100 hover:border-sky-600 p-4 cursor-pointer hover:shadow-lg" >
+                    <h3 class="text-lg mb-4 md:text-xl font-bold font-open-sans" th:text="${note.getTitle()}"></h3>
+                    <p class="font-light md:max-h-24 overflow-hidden" th:text="${note.getContent()}"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="head(title)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+          rel="stylesheet">
+    <script th:src="@{/js/tailwindcss.js}"></script>
+    <script th:src="@{/js/tailwindcss.custom.js}"></script>
+    <title th:text="${title}">Memoics</title>
+</head>
+<body>
+    <div class="flex justify-between items-center"  th:fragment="pageTitle(title)">
+        <div class="flex gap-y-1 items-center py-10">
+            <h3 class="text-xl md:text-2xl font-adlam" th:text="${title}"></h3>
+            <img class="w-5 h-5 md:w-10 md:h-10" th:src="@{/images/note-icon.png}">
+        </div>
+    </div>
+</body>
+</html>
