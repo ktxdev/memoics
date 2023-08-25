@@ -26,4 +26,23 @@ public class NoteServiceImpl implements NoteService {
     public Note save(Note note) {
         return noteRepository.save(note);
     }
+
+    @Override
+    public void deleteNote(Long noteId) {
+        noteRepository.deleteById(noteId);
+    }
+
+    @Override
+    public Note update(Long noteId, Note note) {
+        Note persistedNote = getNoteById(noteId);
+        persistedNote.setTitle(note.getTitle());
+        persistedNote.setContent(note.getContent());
+        return noteRepository.save(persistedNote);
+    }
+
+    @Override
+    public Note getNoteById(Long noteId) {
+        return noteRepository.findById(noteId)
+                .orElseThrow(() -> new RuntimeException("Note with id: " + noteId + " not found"));
+    }
 }
