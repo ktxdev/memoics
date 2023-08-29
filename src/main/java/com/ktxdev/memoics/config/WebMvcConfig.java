@@ -10,5 +10,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
                 .setViewName("redirect:/notes");
+        registry.addViewController("/login")
+                .setViewName("auth/login");
     }
 }

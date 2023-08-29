@@ -1,0 +1,47 @@
+<html lang="en">
+<head th:insert="~{fragments :: head(title='Memoics Note - Register')}"></head>
+<body class="bg-slate-50">
+<section class="w-screen flex flex-col md:items-center">
+    <div class="container md:w-1/4 p-2 md:px-4">
+        <div th:replace="~{fragments :: pageTitle(title = 'Register')}"></div>
+
+        <form method="POST" th:action="@{/users/register}" class="font-open-sans" th:object="${user}">
+            <div class="flex flex-col gap-y-1">
+                <label class="text-lg text-gray-700" for="fullName">Full Name</label>
+                <input th:field="*{fullName}" id="fullName"
+                       class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                       placeholder="Enter Fullname" type="text"/>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+            </div>
+            <div class="flex flex-col gap-y-1 mt-3">
+                <label class="text-lg text-gray-700" for="username">Username</label>
+                <input th:field="*{username}" id="username"
+                       class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                       placeholder="Enter Username" type="text"/>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+            <div class="flex flex-col gap-y-1 mt-3">
+                <label class="text-lg text-gray-700" for="password">Password</label>
+                <input th:field="*{password}" id="password"
+                       class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                       placeholder="Enter Password" type="password"/>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div class="flex flex-col gap-y-1 mt-3">
+                <label class="text-lg text-gray-700" for="passwordConfirm">Confirm Password</label>
+                <input th:field="*{passwordConfirm}" id="passwordConfirm"
+                       class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+                       placeholder="Confirm Password" type="password"/>
+                <span class="text-red-500 text-sm" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
+            </div>
+            <input class="rounded bg-green-600 cursor-pointer hover:bg-green-500 text-white px-4 py-2 mt-5 w-full"
+                   type="submit" value="Register"/>
+        </form>
+
+        <p>
+            Already have an account? <a th:href="@{/login}" class="text-blue-500" >Sign In</a>
+        </p>
+    </div>
+</section>
+</body>
+</html>

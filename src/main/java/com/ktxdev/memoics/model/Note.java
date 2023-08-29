@@ -24,4 +24,6 @@ public class Note {
     @Column(nullable = false)
     @NotBlank(message = "Note content should be provided")
     private String content;
+    @ManyToOne
+    private User user;
 }

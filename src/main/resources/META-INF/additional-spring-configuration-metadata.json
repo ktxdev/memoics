@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "system.admin.password",
+      "type": "java.lang.String",
+      "description": "The default system administrator password"
+    }
+  ]
+}

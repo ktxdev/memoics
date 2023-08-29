@@ -7,3 +7,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+
+system:
+  admin:
+    password: pass1234

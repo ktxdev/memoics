@@ -1,0 +1,35 @@
+<html lang="en">
+<head th:insert="~{fragments :: head(title='Memoics Note - Sign In')}"></head>
+<body class="bg-slate-50">
+<section class="w-screen flex flex-col md:items-center">
+  <div class="container md:w-1/4 p-2 md:px-4">
+    <div th:replace="~{fragments :: pageTitle(title = 'Sign In')}"></div>
+
+    <div th:if="${error}" >
+      Unable to Sign In! Please check your credentials
+    </div>
+
+    <form method="POST" th:action="@{/login}" class="font-open-sans" th:object="${user}">
+      <div class="flex flex-col gap-y-1 mt-3">
+        <label class="text-lg text-gray-700" for="username">Username</label>
+        <input id="username" name="username"
+               class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+               placeholder="Enter Username" type="text"/>
+      </div>
+      <div class="flex flex-col gap-y-1 mt-3">
+        <label class="text-lg text-gray-700" for="password">Password</label>
+        <input name="password" id="password"
+               class="py-2 px-3 rounded border border-gray-300 outline-sky-600 transition-all"
+               placeholder="Enter Password" type="password"/>
+      </div>
+      <input class="rounded bg-green-600 cursor-pointer hover:bg-green-500 text-white px-4 py-2 mt-5 w-full"
+             type="submit" value="Sign In"/>
+    </form>
+
+    <p>
+      Don't have an account? <a th:href="@{/users/register}" class="text-blue-500" >Register</a>
+    </p>
+  </div>
+</section>
+</body>
+</html>

@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="~{fragments :: head(title='Memoics Notes')}"></head>
 
 <body class="bg-slate-50">
-    <section class="w-screen flex flex-col md:items-center">
-        <div class="container w-full p-2 md:px-4">
-            <div class="flex justify-between items-center">
+<section class="w-screen flex flex-col md:items-center">
+    <div class="container w-full p-2 md:px-4">
+        <div class="flex justify-between items-center">
 
-                <div th:replace="~{fragments :: pageTitle(title = 'Memoics Notes')}" ></div>
+            <div th:replace="~{fragments :: pageTitle(title = 'Memoics Notes')}"></div>
 
-                <a href="/notes/new" class="rounded bg-green-600 hover:bg-green-500 text-white font-open-sans px-4 py-2">
+            <div class="flex justify-between gap-x-3">
+                <a sec:authorize="isAuthenticated()" href="/notes/new"
+                   class="rounded bg-green-600 hover:bg-green-500 text-white font-open-sans px-4 py-2">
                     New Note
                 </a>
+                <a sec:authorize="!isAuthenticated()" href="/login"
+                   class="rounded bg-blue-600 hover:bg-blue-500 text-white font-open-sans px-4 py-2">
+                    Sign In
+                </a>
+                <form sec:authorize="isAuthenticated()" method="POST" th:action="@{/logout}">
+                    <input type="submit" value="Logout"
+                           class="rounded bg-blue-600 hover:bg-blue-500 text-white font-open-sans px-4 py-2"/>
+                </form>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4" >
-                <div th:each="note : ${notes}" class="note relative bg-white transition-all rounded-md border border-gray-100 hover:border-sky-600 p-4 cursor-pointer hover:shadow-lg" >
-                    <h3 class="text-lg mb-4 md:text-xl font-bold font-open-sans" th:text="${note.getTitle()}"></h3>
-                    <p class="font-light md:h-24 md:max-h-24 overflow-hidden" th:text="${note.getContent()}"></p>
-                    <div class="flex justify-between mt-5">
-                        <a th:href="@{'/notes/delete/' + ${note.getId()}}" class="text-light text-red-500 hover:text-red-700" >
-                            <i class="fa-solid fa-trash"></i>
-                            Delete
-                        </a>
-                        <a th:href="@{'/notes/edit/' + ${note.getId()}}" class="text-light text-sky-500 hover:text-sky-700" >
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            Edit
-                        </a>
-                        <a th:href="@{'/notes/view/' + ${note.getId()}}" class="text-light text-blue-500 hover:text-blue-700">
-                            Read More
-                            <i class="fa-solid fa-angles-right"></i>
-                        </a>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div th:each="note : ${notes}"
+                 class="note relative bg-white transition-all rounded-md border border-gray-100 hover:border-sky-600 p-4 cursor-pointer hover:shadow-lg">
+                <h3 class="text-lg mb-4 md:text-xl font-bold font-open-sans" th:text="${note.getTitle()}"></h3>
+                <p class="font-light md:h-24 md:max-h-24 overflow-hidden" th:text="${note.getContent()}"></p>
+                <div class="flex justify-between mt-5">
+                    <a sec:authorize="isAuthenticated()" th:href="@{'/notes/delete/' + ${note.getId()}}"
+                       class="text-light text-red-500 hover:text-red-700">
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{'/notes/edit/' + ${note.getId()}}" class="text-light text-sky-500 hover:text-sky-700">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Edit
+                    </a>
+                    <a th:href="@{'/notes/view/' + ${note.getId()}}"
+                       class="text-light text-blue-500 hover:text-blue-700">
+                        Read More
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </body>
 </html>
